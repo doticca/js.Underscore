@@ -2,7 +2,7 @@
 Path: js.Underscore
 AntiForgery: enabled
 Author: Team Grapto (tweet: @teamgrapto)
-Website: http://www.grapto.com
+Website: https://github.com/grapto/js.Underscore
 Version: 1.5.2.2
 OrchardVersion: 1.7.2
 Description: The js.Underscore module contains the Underscore.js and related script libraries.
