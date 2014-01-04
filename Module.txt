@@ -1,10 +1,10 @@
 ﻿Name: Underscore
 Path: js.Underscore
 AntiForgery: enabled
-Author: Fotis G. Pappas (fotisgpap)
+Author: Team Grapto (tweet: @teamgrapto)
 Website: http://www.grapto.com
-Version: 1.5.2.1
+Version: 1.5.2.2
 OrchardVersion: 1.7.2
 Description: The js.Underscore module contains the Underscore.js and related script libraries.
 FeatureDescription: A common location for Underscore.js and related script libraries for Orchard Project.
-Category: Javascript
+Category: Developer

@@ -3,16 +3,21 @@ using Orchard;
 using Orchard.DisplayManagement.Descriptors;
 using Orchard.Environment.Extensions;
 using Orchard.UI.Resources;
+using js.Underscore.Services;
+using Orchard.Environment;
+using Orchard.UI.Admin;
 
 
-namespace js.Modernizr.Shapes
+namespace js.Underscore.Shapes
 {
     public class UnderscoreShapes : IShapeTableProvider
     {
-        private readonly IWorkContextAccessor _wca;
-        public UnderscoreShapes(IWorkContextAccessor wca)
+        private readonly Work<WorkContext> _workContext;
+        private readonly IUnderscoreService _underscoreService;
+        public UnderscoreShapes(Work<WorkContext> workContext, IUnderscoreService underscoreService)
         {
-            _wca = wca;
+            _workContext = workContext;
+            _underscoreService = underscoreService;
         }
 
         public void Discover(ShapeTableBuilder builder)
@@ -20,15 +25,25 @@ namespace js.Modernizr.Shapes
             builder.Describe("HeadScripts")
                 .OnDisplaying(shapeDisplayingContext =>
                 {
-                    var resourceManager = _wca.GetContext().Resolve<IResourceManager>();
+                    if (!_underscoreService.GetAutoEnable()) return;
+                    if (!_underscoreService.GetAutoEnableAdmin())
+                    {
+                        var request = _workContext.Value.HttpContext.Request;
+                        if (AdminFilter.IsApplied(request.RequestContext))
+                        {
+                            return;
+                        }
+                    }
+
+                    var resourceManager = _workContext.Value.Resolve<IResourceManager>();
                     var scripts = resourceManager.GetRequiredResources("script");
 
 
-                    var currentModernizr = scripts
+                    var currentUnderscore = scripts
                             .Where(l => l.Name == "Underscore")
                             .FirstOrDefault();
 
-                    if (currentModernizr == null)
+                    if (currentUnderscore == null)
                     {
                         resourceManager.Require("script", "Underscore").AtHead();
                     }                    
