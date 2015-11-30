@@ -102,9 +102,6 @@
     <Content Include="Views\EditorTemplates\Parts\Underscore.UnderscoreSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Placement.info" />
   </ItemGroup>
   <ItemGroup>
